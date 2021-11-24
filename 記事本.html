@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="./bootstrap5/css/bootstrap.rtl.css" rel="stylesheet"/>
+<script src="./bootstrap5/js/bootstrap.bundle.js"></script>
+<link rel='icon' href=''>
+<!--引入圖標-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<title>vue記事本</title>
+<style>
+*{margin: 0;padding: 0;}
+	li{list-style:none}
+	#todoapp{width:200px;margin:10px auto;background:#fab;padding:10px}
+	.new-todo{border:0px}
+	li{padding:5px;border-bottom:1px solid;}
+	.bi-x-square-fill{float:right;border:0;background:#fab;display:none}
+	li:hover .bi-x-square-fill{display:block;}
+	.bi-x-lg{float:right;border:0;background:#fab;}
+	
+</style>
+<body>
+	<section id='todoapp'>
+		<header class='header'>
+		  <h1>記事本</h1>
+		  <input autofocus='autofocus' autocomplete='off' @keyup.enter='add'
+		   v-model='inputValue' placeholder='請輸入任務' class='new-todo'
+		  />		 
+		</header>
+	<section class='main'>
+		<ul>
+			<li v-for='(item,index) in list'>
+			{{index+1}}.{{item}}
+			<button class='bi-x-square-fill' v-on:click='remove(index)'></button>
+			</li>
+		</ul>
+	</section>
+	
+	<footer class='footer'>
+		<span class='todo-count'> <strong>{{list.length}}</strong>item</span>
+		<button class='bi-x-lg' @click='clear'></button>
+	</footer>
+	</section>
+<script>
+	let app=new Vue({
+		el:'#todoapp',
+		data:{
+			list:['打工','看書','運動'],
+			inputValue:'寫代碼',
+		},
+		methods:{
+			add:function(){
+				this.list.push(this.inputValue)
+			},
+			remove:function(mun){
+				this.list.splice(mun,1);
+			},
+			clear:function(){
+				this.list=[];
+			},
+		}
+	})
+</script>
+</body>
+</html>
